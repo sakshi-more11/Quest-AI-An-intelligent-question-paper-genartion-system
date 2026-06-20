@@ -1,211 +1,295 @@
-# SecureExam AI — Setup Guide
+# 🚀 QuestAI: Intelligent AI-Based Question Paper Generation Using NLP & Bloom's Taxonomy
 
-## Project Structure
+<p align="center">
+  <img src="https://img.shields.io/badge/AI-Powered-blue?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/NLP-Enabled-green?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Machine%20Learning-Integrated-orange?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Deep%20Learning-Supported-red?style=for-the-badge" />
+</p>
 
-```
-securexam/
-├── public/
-│   └── index.html               ← HTML entry point
-├── src/
-│   ├── index.js                 ← React entry point
-│   ├── index.css                ← Global styles + Tailwind
-│   ├── App.jsx                  ← Root: all state, auth, routing
-│   ├── data/
-│   │   └── constants.js         ← Users, seed data, enums
-│   ├── components/
-│   │   ├── Sidebar.jsx          ← Navigation sidebar
-│   │   └── UI.jsx               ← Shared UI components (Badge, Card, etc.)
-│   └── pages/
-│       ├── LoginPage.jsx        ← Login screen
-│       ├── Dashboard.jsx        ← Teacher & Admin dashboards
-│       ├── UploadSyllabus.jsx   ← Upload + AI parse syllabus (Teacher)
-│       ├── QuestionBank.jsx     ← View + generate questions (Teacher full, Admin read)
-│       ├── Templates.jsx        ← Upload/manage templates (Teacher full, Admin read)
-│       ├── GeneratePaper.jsx    ← Generate Set A/B/C + download PDF (Teacher only)
-│       ├── Papers.jsx           ← View + download generated papers (Admin only)
-│       └── ActivityLogs.jsx     ← Audit trail (Admin all, Teacher own)
-├── package.json
-├── tailwind.config.js
+## 📖 Overview
+
+**QuestAI** is an intelligent AI-powered question paper generation system that automates the traditional examination paper-setting process using **Machine Learning (ML)**, **Deep Learning (DL)**, **Natural Language Processing (NLP)**, and **Bloom's Taxonomy**.
+
+The system analyzes syllabus content, classifies questions into cognitive levels, predicts difficulty, removes repetitive questions, and generates multiple balanced examination papers with minimal human intervention.
+
+---
+
+## 🎯 Project Objectives
+
+✅ Automate question paper generation using AI and NLP techniques.
+
+✅ Classify questions according to **Bloom's Taxonomy** levels:
+
+* Remember
+* Understand
+* Apply
+* Analyze
+* Evaluate
+* Create
+
+✅ Ensure balanced difficulty distribution and syllabus coverage.
+
+✅ Prevent duplicate and semantically similar questions.
+
+✅ Generate multiple unique paper sets following university examination patterns.
+
+---
+
+## ✨ Key Features
+
+### 📚 Syllabus-Based Question Generation
+
+Generate questions directly from uploaded syllabus content.
+
+### 🧠 Bloom's Taxonomy Classification
+
+Automatically categorizes questions into cognitive learning levels.
+
+### 📊 Difficulty Prediction
+
+Classifies questions as Easy, Medium, or Hard.
+
+### 🔍 Semantic Similarity Checking
+
+Avoids duplicate and repetitive questions.
+
+### 📄 Multiple Paper Set Generation
+
+Generates:
+
+* Set A
+* Set B
+* Set C
+
+### 📑 PDF Export
+
+Download generated question papers in printable format.
+
+### 🎯 Balanced Paper Creation
+
+Ensures:
+
+* Proper syllabus coverage
+* Difficulty balancing
+* Non-repetition
+* Examination pattern compliance
+
+---
+
+## 🏗️ Project Structure
+
+```text
+QuestAI/
+├── frontend/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   ├── services/
+│   │   └── App.jsx
+│   ├── public/
+│   └── package.json
+│
+├── backend/
+│   ├── models/
+│   ├── routes/
+│   ├── utils/
+│   ├── app.py
+│   └── requirements.txt
+│
+├── dataset/
+│   ├── syllabus_data.csv
+│   └── question_bank.csv
+│
+├── docs/
+│   └── Research_Paper.pdf
+│
 └── README.md
 ```
 
 ---
 
-## Role Permissions
+## 🛠️ Tech Stack
 
-| Feature                   | Teacher | Admin     |
-|---------------------------|---------|-----------|
-| Upload Syllabus           | ✅ Yes  | ❌ No     |
-| Generate Question Bank    | ✅ Yes  | ❌ No     |
-| Upload Templates          | ✅ Yes  | ❌ No     |
-| Generate Paper (Set A/B/C)| ✅ Yes  | ❌ No     |
-| Download PDF (own papers) | ✅ Yes  | ✅ Yes    |
-| View All Questions        | ✅ Yes  | ✅ Yes    |
-| View Generated Papers     | ✅ Yes  | ✅ Yes    |
-| View Activity Logs        | Own only| All logs |
-| System Dashboard          | Own data| All data |
+### Frontend
+
+* ⚛️ React.js
+* 🎨 HTML5
+* 🎨 CSS3
+* 🟨 JavaScript
+
+### Backend
+
+* 🐍 Python
+* 🌐 Flask / FastAPI
+
+### AI & Machine Learning
+
+| Module                | Model/Technique                  |
+| --------------------- | -------------------------------- |
+| Question Generation   | GPT-5 / GPT-4o                   |
+| Semantic Similarity   | all-MiniLM-L6-v2                 |
+| Bloom Classification  | DistilBERT / Logistic Regression |
+| Difficulty Prediction | Random Forest                    |
+| NLP Processing        | Sentence Transformers            |
+
+### Database
+
+* 🗄️ MySQL / MongoDB
 
 ---
 
-## How to Run
+## 🤖 AI Workflow
 
-### Step 1 — Prerequisites
+```text
+Syllabus Upload
+       ↓
+Topic Extraction using NLP
+       ↓
+Question Generation
+       ↓
+Bloom Classification
+       ↓
+Difficulty Prediction
+       ↓
+Duplicate Removal
+       ↓
+Balanced Question Selection
+       ↓
+Question Paper Generation
+       ↓
+PDF Export
+```
 
-Make sure you have Node.js (v16+) installed:
+---
+
+## 👨‍🏫 User Workflow
+
+### 1️⃣ Upload Syllabus
+
+Upload syllabus or course content.
+
+### 2️⃣ AI Processing
+
+System extracts topics and learning outcomes automatically.
+
+### 3️⃣ Question Generation
+
+AI generates relevant examination questions.
+
+### 4️⃣ Classification & Validation
+
+Questions are:
+
+* Bloom classified
+* Difficulty scored
+* Duplicate checked
+
+### 5️⃣ Paper Generation
+
+Generate multiple balanced paper sets.
+
+### 6️⃣ Export
+
+Download final question papers as PDF.
+
+---
+
+## 🚀 Installation & Setup
+
+### Prerequisites
+
 ```bash
-node --version   # Should be v16 or higher
+Python 3.10+
+Node.js 18+
+npm
+```
+
+Check versions:
+
+```bash
+python --version
+node --version
 npm --version
 ```
 
-Download Node.js from: https://nodejs.org
-
 ---
 
-### Step 2 — Create the Project
+### Clone Repository
 
 ```bash
-# Create a new React app
-npx create-react-app securexam
-cd securexam
+git clone https://github.com/your-username/QuestAI.git
+cd QuestAI
 ```
 
 ---
 
-### Step 3 — Install Tailwind CSS
+### Backend Setup
 
 ```bash
-npm install -D tailwindcss postcss autoprefixer
-npx tailwindcss init
+cd backend
+
+pip install -r requirements.txt
+
+python app.py
+```
+
+Backend runs at:
+
+```text
+http://localhost:5000
 ```
 
 ---
 
-### Step 4 — Copy All Files
-
-Copy all the files from this project into the `securexam/` folder:
-
-- Replace `src/App.js` with `src/App.jsx`
-- Replace `src/index.js` with `src/index.js`
-- Replace `src/index.css` with `src/index.css`
-- Create `src/data/constants.js`
-- Create `src/components/Sidebar.jsx`
-- Create `src/components/UI.jsx`
-- Create `src/pages/LoginPage.jsx`
-- Create `src/pages/Dashboard.jsx`
-- Create `src/pages/UploadSyllabus.jsx`
-- Create `src/pages/QuestionBank.jsx`
-- Create `src/pages/Templates.jsx`
-- Create `src/pages/GeneratePaper.jsx`
-- Create `src/pages/Papers.jsx`
-- Create `src/pages/ActivityLogs.jsx`
-- Replace `tailwind.config.js`
-- Replace `public/index.html`
-
----
-
-### Step 5 — Update tailwind.config.js
-
-```js
-/** @type {import('tailwindcss').Config} */
-module.exports = {
-  content: ["./src/**/*.{js,jsx,ts,tsx}"],
-  theme: { extend: {} },
-  plugins: [],
-};
-```
-
----
-
-### Step 6 — Update src/index.css (top of file)
-
-Make sure these three lines are at the TOP of index.css:
-```css
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-```
-
----
-
-### Step 7 — Start the App
+### Frontend Setup
 
 ```bash
+cd frontend
+
+npm install
+
 npm start
 ```
 
-The app opens at: http://localhost:3000
+Frontend runs at:
 
----
-
-## Demo Credentials
-
-| Username  | Password   | Role    | Access Level     |
-|-----------|------------|---------|------------------|
-| teacher1  | teach123   | Teacher | Full access      |
-| teacher2  | teach456   | Teacher | Full access      |
-| admin     | admin123   | Admin   | Read-only viewer |
-
----
-
-## Teacher Workflow
-
-1. **Login** as teacher1 / teach123
-2. **Upload Syllabus** → Upload a PDF/PPT/DOCX → AI reads and extracts units automatically (no manual unit entry)
-3. **Question Bank** → Click "Generate Questions from Syllabus" → select your syllabus → AI generates 15 questions
-4. **Templates** → Upload a .docx template with placeholders like `{{subject}}`, `{{sectionA}}`
-5. **Generate Paper** → Select subject + template → AI generates Set A, Set B, Set C
-6. **Download** → Click "⬇ Set A PDF", "⬇ Set B PDF", "⬇ Set C PDF" to print/save
-
----
-
-## Admin Workflow
-
-1. **Login** as admin / admin123
-2. **Dashboard** → See system-wide stats (read-only)
-3. **View Q-Bank** → Browse all questions (read-only, no generate button)
-4. **Generated Papers** → See all papers teachers generated → Download any set as PDF
-5. **Activity Logs** → See full audit trail of all users
-
----
-
-## API Key Note
-
-The app calls the Anthropic Claude API directly from the browser.
-The API key is handled automatically by the claude.ai artifact environment.
-
-If running standalone outside claude.ai, you need to add your API key:
-
-In each page file that calls `fetch("https://api.anthropic.com/v1/messages", ...)`,
-add this header:
-```js
-headers: {
-  "Content-Type": "application/json",
-  "x-api-key": "YOUR_API_KEY_HERE",
-  "anthropic-version": "2023-06-01",
-  "anthropic-dangerous-direct-browser-access": "true"
-}
+```text
+http://localhost:3000
 ```
 
-Get your API key from: https://console.anthropic.com
+---
+
+## 📈 Expected Outcomes
+
+✅ Fully automated question paper generation.
+
+✅ Reduced manual effort in examination paper setting.
+
+✅ Improved Bloom's Taxonomy classification accuracy.
+
+✅ Better syllabus coverage and question diversity.
+
+✅ Multiple balanced question paper sets.
+
+✅ Enhanced reliability and consistency in examinations.
 
 ---
 
-## Troubleshooting
+## 📊 Future Enhancements
 
-**App won't start:**
-```bash
-npm install   # reinstall dependencies
-npm start
-```
+🔹 Multilingual Question Generation
 
-**Tailwind styles not working:**
-- Make sure `@tailwind base; @tailwind components; @tailwind utilities;` are at the TOP of `src/index.css`
-- Make sure `tailwind.config.js` has `content: ["./src/**/*.{js,jsx}"]`
+🔹 AI-Based Answer Key Generation
 
-**AI not generating questions:**
-- Check browser console for API errors
-- The AI fallback will kick in automatically with sample questions
+🔹 Question Quality Evaluation
 
-**Files not found:**
-- Make sure the folder structure matches exactly: `src/pages/`, `src/components/`, `src/data/`
-- React is case-sensitive — `LoginPage.jsx` not `loginpage.jsx`
+🔹 Learning Management System (LMS) Integration
+
+🔹 Advanced Analytics Dashboard
+
+🔹 Personalized Exam Pattern Support
+
+---
+
+
