@@ -1,0 +1,37 @@
+Operating System
+Deadlock
+Scheduling
+CPU
+Process
+Thread
+Virtual Memory
+Paging
+Segmentation
+Kernel
+Machine Learning
+Regression
+Classification
+CNN
+RNN
+Transformer
+Database
+Normalization
+SQL
+Cloud Computing
+Docker
+Kubernetes
+Compiler
+Lexical Analysis
+Syntax Analysis
+Computer Networks
+TCP
+UDP
+Routing
+Switching
+Encryption
+Authentication
+Data Structures
+Binary Tree
+Heap
+Graph
+Dynamic Programming

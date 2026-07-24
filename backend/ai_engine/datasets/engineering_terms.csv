@@ -1,0 +1,41 @@
+Subject,Term
+Operating Systems,Process
+Operating Systems,Thread
+Operating Systems,Semaphore
+Operating Systems,Mutex
+Operating Systems,Deadlock
+Operating Systems,Scheduling
+Operating Systems,Paging
+Operating Systems,Virtual Memory
+DBMS,Normalization
+DBMS,Transaction
+DBMS,SQL
+DBMS,Join
+DBMS,Indexing
+DBMS,ER Diagram
+DBMS,Primary Key
+DBMS,Foreign Key
+Computer Networks,TCP
+Computer Networks,UDP
+Computer Networks,Routing
+Computer Networks,Switching
+Computer Networks,IPv4
+Computer Networks,IPv6
+Computer Networks,OSI Model
+Computer Networks,HTTP
+Data Structures,Stack
+Data Structures,Queue
+Data Structures,Tree
+Data Structures,Graph
+Data Structures,Heap
+Data Structures,Hash Table
+Data Structures,Linked List
+Data Structures,Binary Search Tree
+Artificial Intelligence,Machine Learning
+Artificial Intelligence,Neural Network
+Artificial Intelligence,Deep Learning
+Artificial Intelligence,CNN
+Artificial Intelligence,RNN
+Artificial Intelligence,Transformer
+Artificial Intelligence,NLP
+Artificial Intelligence,Reinforcement Learning

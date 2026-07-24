@@ -1,0 +1,25 @@
+question,label
+"Define machine learning and state its applications.",BT1
+"List the different types of machine learning approaches.",BT1
+"Identify the components of a machine learning system.",BT1
+"Explain the concept of supervised learning with examples.",BT2
+"Describe the working principle of a decision tree algorithm.",BT2
+"Explain the architecture of an artificial neural network.",BT2
+"Apply the KNN algorithm to classify a given dataset.",BT3
+"Implement a Naive Bayes classifier for text classification.",BT3
+"Use regression techniques to predict future values from data.",BT3
+"Compare decision tree and support vector machine algorithms.",BT4
+"Analyze the performance of different classification models.",BT4
+"Differentiate between supervised and unsupervised learning techniques.",BT4
+"Evaluate the accuracy and precision of a machine learning model.",BT5
+"Assess the effectiveness of clustering algorithms on real-world datasets.",BT5
+"Critically analyze the limitations of machine learning approaches.",BT5
+"Design a machine learning pipeline for healthcare prediction.",BT6
+"Create a recommendation system using machine learning techniques.",BT6
+"Develop an intelligent model for automated decision making.",BT6
+"Define overfitting and underfitting in machine learning.",BT1
+"Explain cross validation techniques used in machine learning.",BT2
+"Apply K-means clustering algorithm on a sample dataset.",BT3
+"Compare K-means clustering with hierarchical clustering.",BT4
+"Evaluate different feature selection techniques.",BT5
+"Design a fraud detection system using machine learning.",BT6

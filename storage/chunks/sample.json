@@ -1,0 +1,34 @@
+[
+    {
+        "chunk_id": 1,
+        "text": "K.E. Society’s Rajarambapu Institute of Technology, Rajaramnagar (An Autonomous Institute, affiliated to Shivaji University, Kolhapur) S. Y. B. Tech. Syllabus To be implemented for 2023-27 and 2024-28 NEP Batch Department of Computer Science & Engineering (Artificial Intelligence and Machine Learning) Class:- S. Y. B. Tech. Semester- VI L T P Credits Course Code : AI204 Course Name : Machine Learning 3 - - 3 Course Description: The students will understand the basics of Machine Learning. They wi"
+    },
+    {
+        "chunk_id": 2,
+        "text": "ing 3 - - 3 Course Description: The students will understand the basics of Machine Learning. They will learn to apply different machine-learning algorithms to various datasets. Course Learning Outcomes: After successful completion of the course, students will be able to: 1. Realize machine learning and learn the basic theory underlying machine learning. 2. Differentiate supervised, unsupervised and reinforcement learning 3. Recognize the basic concepts of learning and decision trees. 4. Realize "
+    },
+    {
+        "chunk_id": 3,
+        "text": "d reinforcement learning 3. Recognize the basic concepts of learning and decision trees. 4. Realize Bayesian techniques for problems appear in machine learning 5. Perform statistical analysis of machine learning techniques Prerequisites:  Basic knowledge of Probability theory  Basic knowledge of python programming Course Content Unit No Description Hrs 1 Introduction Learning in the context of ML, Three phases of performing ML, Algorithms and Models in ML, Logical, Geometric and Probabilistic "
+    },
+    {
+        "chunk_id": 4,
+        "text": "L, Three phases of performing ML, Algorithms and Models in ML, Logical, Geometric and Probabilistic models, Underfitting, Overfitting and Right models, Practical ML examples, Types of ML problems, Classification of ML algorithms. 06 2 Decision tree Purpose and uses, Constructing a decision tree, Gini Index, Gain ratio, ID3, C4.5, CART, Benefits of decision tree, Random forest. 06 3 Instance Based Learning and kernel-methods based learning KNN algorithm, Determining K, distance measures in KNN, C"
+    },
+    {
+        "chunk_id": 5,
+        "text": "Learning and kernel-methods based learning KNN algorithm, Determining K, distance measures in KNN, Case based Reasoning, Support vector Machines (SVM). 06 4 Clustering Based Learning Types of clustering, K-means clustering algorithm, Advantages and dis- advantages of K-means clustering, Distance measures. 06 5 Bayesian learning Classical, Empirical, Subjective methods, Types of events, Types of probabilities, Normal Distribution, Bayes’ Theorem, Naïve Bayes’ classifier. 06 K.E. Society’s Rajaram"
+    },
+    {
+        "chunk_id": 6,
+        "text": "obabilities, Normal Distribution, Bayes’ Theorem, Naïve Bayes’ classifier. 06 K.E. Society’s Rajarambapu Institute of Technology, Rajaramnagar (An Autonomous Institute, affiliated to Shivaji University, Kolhapur) S. Y. B. Tech. Syllabus To be implemented for 2023-27 and 2024-28 NEP Batch Department of Computer Science & Engineering (Artificial Intelligence and Machine Learning) 6 Regression Based Learning Regression Analysis, Covariance, Correlation Coefficient, Regression Methods, Simple liner "
+    },
+    {
+        "chunk_id": 7,
+        "text": "Learning Regression Analysis, Covariance, Correlation Coefficient, Regression Methods, Simple liner regression, Regression Model, Multiple Regression, Polynomial regression, Generalized linear models, Logistic regression. 06 References - Text Books:  Sunila Gollapudi “Practical Machine Learning” PACKT Publishing  Mitchell, Tom. M., “Machine Learning”, McGraw-Hill Education.  John Paul Mueller and Luca Mueller, “Machine Learning for Dummies” Reference Books:  Stephen Marsland, “Machine Learni"
+    },
+    {
+        "chunk_id": 8,
+        "text": "nd Luca Mueller, “Machine Learning for Dummies” Reference Books:  Stephen Marsland, “Machine Learning An Algorithmic Perspective”, CRC Tylor and Francis Publication  https://machinelearningmastery.com/  https://www.udacity.com/course/intro-to-machine-learning--ud120  https://www.coursera.org/learn/machine-learning-duke"
+    }
+]

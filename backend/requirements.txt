@@ -1,0 +1,16 @@
+fastapi
+uvicorn
+python-dotenv
+python-multipart
+pydantic
+reportlab
+python-docx
+pdfplumber
+pdfminer.six
+pandas
+openpyxl
+python-pptx
+easyocr
+sentence-transformers
+faiss-cpu
+google-genai

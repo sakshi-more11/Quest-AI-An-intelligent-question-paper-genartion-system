@@ -1,0 +1,26 @@
+{
+
+"college":{
+
+"name":"ABC Engineering College",
+
+"department":"Computer Science"
+
+},
+
+
+"header":{
+
+"exam_title":"Internal Assessment Examination"
+
+},
+
+
+"question_format":{
+
+"numbering":"1)"
+
+}
+
+
+}

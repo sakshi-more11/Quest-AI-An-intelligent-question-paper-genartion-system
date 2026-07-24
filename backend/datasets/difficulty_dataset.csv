@@ -1,0 +1,21 @@
+question,label
+Define machine learning.,Easy
+List the types of supervised learning.,Easy
+What is overfitting?,Easy
+State the applications of AI.,Easy
+Explain the concept of classification.,Easy
+Describe decision tree algorithm.,Medium
+Explain KNN with suitable example.,Medium
+Illustrate Naive Bayes classifier.,Medium
+Explain Support Vector Machine.,Medium
+Describe K-Means clustering.,Medium
+Apply KNN algorithm on the given dataset.,Hard
+Implement Decision Tree for loan prediction.,Hard
+Compare SVM and Random Forest using suitable examples.,Hard
+Analyze the performance of K-Means clustering.,Hard
+Evaluate different feature selection techniques.,Hard
+Design a machine learning pipeline for healthcare.,Hard
+Develop an AI system for fraud detection.,Hard
+Create a recommendation system using ML.,Hard
+Build a predictive maintenance model.,Hard
+Design an intelligent chatbot using NLP.,Hard

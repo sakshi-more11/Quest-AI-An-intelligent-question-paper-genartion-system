@@ -1,0 +1,151 @@
+
+##############################
+# Python
+##############################
+__pycache__/
+*.py[cod]
+*$py.class
+
+##############################
+# Virtual Environment
+##############################
+venv/
+.venv/
+env/
+ENV/
+
+##############################
+# Environment Variables
+##############################
+.env
+.env.*
+
+##############################
+# IDE
+##############################
+.vscode/
+.idea/
+
+##############################
+# OS Files
+##############################
+.DS_Store
+Thumbs.db
+
+##############################
+# Logs
+##############################
+logs/
+*.log
+
+##############################
+# Pytest / Cache
+##############################
+.pytest_cache/
+.mypy_cache/
+.cache/
+
+##############################
+# Jupyter
+##############################
+.ipynb_checkpoints/
+
+##############################
+# SQLite
+##############################
+*.db
+*.sqlite
+questai.db
+
+##############################
+# Temporary Files
+##############################
+temp_*
+*.tmp
+
+##############################
+# Generated Files
+##############################
+generated_papers/
+generated_questions/
+exports/
+output/
+outputs/
+
+##############################
+# Uploads
+##############################
+uploads/
+
+##############################
+# Vector Database
+##############################
+faiss_index/
+vector_db/
+knowledge_base/
+*.faiss
+
+##############################
+# Models
+##############################
+*.pt
+*.pth
+*.ckpt
+*.bin
+*.h5
+*.onnx
+*.safetensors
+*.pkl
+*.pickle
+
+backend/ai/models/checkpoint-*/
+backend/ai/models/bloom_bert/checkpoint-*/
+backend/ai/models/difficulty_bert/checkpoint-*/
+
+##############################
+# HuggingFace
+##############################
+.huggingface/
+hf_cache/
+
+##############################
+# Node
+##############################
+node_modules/
+dist/
+build/
+
+##############################
+# Compiled
+##############################
+*.so
+*.dll
+*.exe
+
+##############################
+# Git
+##############################
+.git/
+
+##############################
+# Training Outputs
+##############################
+training/
+runs/
+checkpoints/
+tensorboard/
+wandb/
+
+##############################
+# PDFs generated during testing
+##############################
+*.pdf
+*.docx
+*.pptx
+
+##############################
+# Images generated during testing
+##############################
+*.png
+*.jpg
+*.jpeg
