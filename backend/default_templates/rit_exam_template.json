@@ -1,0 +1,31 @@
+{
+  "id": "builtin-default-exam-template",
+  "template_name": "RIT Template",
+  "builtin": true,
+  "template_json": {
+    "template_type": "end_semester_default",
+    "learned_template": {
+      "pattern": {"Q.1": []},
+      "slots": [
+        {"section": "Q.1", "question_no": "Q.1", "sub_question": "A", "marks": 8, "co": "CO 1", "bloom": "BL 2"},
+        {"section": "Q.1", "question_no": "Q.1", "sub_question": "B", "marks": 7, "choice_group": "q1b", "alternative": "or", "co": "CO 1", "bloom": "BL 3"},
+        {"section": "Q.1", "question_no": "Q.1", "sub_question": "B", "marks": 7, "choice_group": "q1b", "co": "CO 1", "bloom": "BL 3"},
+        {"section": "Q.2", "question_no": "Q.2", "sub_question": "A", "marks": 8, "co": "CO 2", "bloom": "BL 3"},
+        {"section": "Q.2", "question_no": "Q.2", "sub_question": "B", "marks": 7, "choice_group": "q2b", "alternative": "or", "co": "CO 2", "bloom": "BL 3"},
+        {"section": "Q.2", "question_no": "Q.2", "sub_question": "B", "marks": 7, "choice_group": "q2b", "co": "CO 2", "bloom": "BL 3"},
+        {"section": "Q.3", "question_no": "Q.3", "sub_question": "A", "marks": 8, "co": "CO 3", "bloom": "BL 3"},
+        {"section": "Q.3", "question_no": "Q.3", "sub_question": "B", "marks": 7, "choice_group": "q3b", "alternative": "or", "co": "CO 3", "bloom": "BL 3"},
+        {"section": "Q.3", "question_no": "Q.3", "sub_question": "B", "marks": 7, "choice_group": "q3b", "co": "CO 3", "bloom": "BL 3"},
+        {"section": "Q.4", "question_no": "Q.4", "sub_question": "A", "marks": 8, "co": "CO 4", "bloom": "BL 3"},
+        {"section": "Q.4", "question_no": "Q.4", "sub_question": "B", "marks": 7, "choice_group": "q4b", "alternative": "or", "co": "CO 4", "bloom": "BL 4"},
+        {"section": "Q.4", "question_no": "Q.4", "sub_question": "B", "marks": 7, "choice_group": "q4b", "co": "CO 4", "bloom": "BL 4"},
+        {"section": "Q.5", "question_no": "Q.5", "sub_question": "A", "marks": 10, "selection_group": "q5", "required_count": 2, "co": "CO 5", "bloom": "BL 2"},
+        {"section": "Q.5", "question_no": "Q.5", "sub_question": "B", "marks": 10, "selection_group": "q5", "required_count": 2, "co": "CO 5", "bloom": "BL 3"},
+        {"section": "Q.5", "question_no": "Q.5", "sub_question": "C", "marks": 10, "selection_group": "q5", "required_count": 2, "co": "CO 5", "bloom": "BL 5"},
+        {"section": "Q.6", "question_no": "Q.6", "sub_question": "A", "marks": 10, "selection_group": "q6", "required_count": 2, "co": "CO 6", "bloom": "BL 4"},
+        {"section": "Q.6", "question_no": "Q.6", "sub_question": "B", "marks": 10, "selection_group": "q6", "required_count": 2, "co": "CO 6", "bloom": "BL 2"},
+        {"section": "Q.6", "question_no": "Q.6", "sub_question": "C", "marks": 10, "selection_group": "q6", "required_count": 2, "co": "CO 6", "bloom": "BL 4"}
+      ]
+    }
+  }
+}

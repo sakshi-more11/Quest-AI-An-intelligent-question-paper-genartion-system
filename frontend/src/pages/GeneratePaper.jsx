@@ -56,11 +56,28 @@ function sectionTitle(key) {
 }
 
 function paperTotal(paperSet) {
-  return Object.values(paperSet || {}).flat().reduce((sum, question) => sum + Number(question.marks || 0), 0);
+  const countedChoices = new Set();
+  const selectedCounts = new Map();
+  return Object.values(paperSet || {}).flat().reduce((sum, question) => {
+    if (question.choice_group) {
+      if (countedChoices.has(question.choice_group)) return sum;
+      countedChoices.add(question.choice_group);
+    }
+    if (question.selection_group) {
+      const count = selectedCounts.get(question.selection_group) || 0;
+      if (count >= Number(question.required_count || 1)) return sum;
+      selectedCounts.set(question.selection_group, count + 1);
+    }
+    return sum + Number(question.marks || 0);
+  }, 0);
 }
 
 function escapeHtml(value) {
   return String(value ?? "").replace(/[&<>\"]/g, char => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[char]));
+}
+
+function isDefaultTemplate(template) {
+  return Boolean(template?.builtin || template?.template_json?.template_type === "end_semester_default");
 }
 
 export default function GeneratePaper({ user, questions, syllabi, templates, onGenerated }) {
@@ -121,9 +138,10 @@ export default function GeneratePaper({ user, questions, syllabi, templates, onG
     );
   }, [syllabi, subject, courseId]);
 
-  // An uploaded faculty paper is mandatory: it is the source of truth for
-  // all sections, question slots, and marks.
+  // Either a faculty upload or the built-in university paper can be the
+  // source of truth for sections, question slots, and marks.
   const canGenerate = subject.trim() && Boolean(template) && (matchedSyllabus || subjectQs.length >= 3);
+  const usingDefaultTemplate = isDefaultTemplate(selectedTemplate);
 
   const generate = async () => {
     if (!canGenerate) return;
@@ -233,6 +251,23 @@ export default function GeneratePaper({ user, questions, syllabi, templates, onG
 
   const downloadPDF = (setKey) => {
     const s = sets[setKey];
+    if (usingDefaultTemplate) {
+      const questionBlocks = Object.entries(s || {}).map(([section, qs]) => {
+        const questionNo = qs[0]?.question_no || section.replace(/^section/i, "");
+        const instruction = ["Q.5", "Q.6"].includes(questionNo) ? "Answer the following (Any Two)" : "Answer the following";
+        const rows = (qs || []).map((q, index) => q.or_before
+          ? `<div class="or">OR</div><div class="question-row"><div class="part">${escapeHtml(q.sub_question || "B")}</div><div class="question">${escapeHtml(q.question)}</div><div>${Number(q.marks)} </div><div>${escapeHtml(q.co || "")}</div><div>${escapeHtml(q.bloom || "")}</div></div>`
+          : `<div class="question-row"><div class="part">${escapeHtml(q.sub_question || String.fromCharCode(65 + index))}</div><div class="question">${escapeHtml(q.question)}</div><div>${Number(q.marks)} </div><div>${escapeHtml(q.co || "")}</div><div>${escapeHtml(q.bloom || "")}</div></div>`
+        ).join("");
+        return `<section><div class="question-heading"><b>${escapeHtml(questionNo)}</b><span>${instruction}</span><span>Marks &nbsp;&nbsp;&nbsp; COs &nbsp;&nbsp;&nbsp; BT Level</span></div>${rows}</section>`;
+      }).join("");
+      const html = `<!DOCTYPE html><html><head><title>${escapeHtml(subject)} - Set ${setKey}</title><style>
+        @page{size:A4;margin:14mm 16mm 17mm} body{font-family:"Times New Roman",serif;color:#111;font-size:12pt;line-height:1.32}.top{display:grid;grid-template-columns:115px 1fr 115px;gap:12px;align-items:center;text-align:center}.box{height:64px;border:1px solid #222;font-weight:bold;font-size:14pt;padding-top:4px}.box div{height:39px;border-top:1px solid #222;margin-top:4px}.inst{font-size:14pt;line-height:1.15}.inst strong{font-size:16pt}.course{text-align:center;font-size:14pt;margin:7px 0}.meta{display:flex;justify-content:space-between;border-bottom:1.5px solid #111;padding:4px 0 8px;font-size:13pt}.instructions{margin:18px 0 54px;display:grid;grid-template-columns:82px 1fr}.instructions b{font-size:14pt}.instructions ol{margin:0;padding-left:20px}.question-heading{display:grid;grid-template-columns:65px 1fr 235px;gap:5px;font-size:13pt;margin:18px 0 11px}.question-row{display:grid;grid-template-columns:42px 1fr 44px 58px 54px;gap:7px;margin:0 0 14px 82px;break-inside:avoid}.question{padding-right:8px;text-align:justify}.or{text-align:center;font-size:14pt;font-weight:bold;margin:0 0 10px 80px}.footer{position:fixed;bottom:0;left:0;right:0;text-align:center;font-size:11pt}.set{position:fixed;bottom:0;left:0;font-size:10pt}@media print{.footer:after{content:"Page " counter(page) " of " counter(pages)}}
+      </style></head><body><div class="top"><div class="box">Enroll No<div></div></div><div class="inst">K.E.Society’s<br><strong>Rajarambapu Institute of Technology, Rajaramnagar</strong><br>(An Empowered Autonomous Institute, Affiliated to SUK)<br>End Semester Examination<br>T.Y.B.Tech. ${escapeHtml(level)}</div><div class="box">Q.P.Code<div></div></div></div><div class="course"><b>Course Code:</b> ${escapeHtml(courseId)} &nbsp;&nbsp;&nbsp;&nbsp; <b>Course Name:</b> ${escapeHtml(subject)}</div><div class="meta"><span><b>Day & Date:</b> ____________________<br><b>Time:</b> ____________________</span><span><b>Max Marks: 100</b></span></div><div class="instructions"><b>Instructions:</b><ol><li>All questions are compulsory.</li><li>Figures in rounded brackets within the question indicate the scheme of marking for the respective part; figures in the right columns indicate marks, COs and BT level.</li><li>CO is the index number of the Course Outcome statement.</li><li>BT Levels 1–6 are remember, understand, apply, analyze, evaluate and create respectively.</li><li>Assume suitable data if necessary.</li></ol></div>${questionBlocks}<div class="set">Set ${setKey}</div><div class="footer"></div></body></html>`;
+      const win = window.open("", "_blank");
+      win.document.write(html); win.document.close(); win.focus(); setTimeout(() => win.print(), 500);
+      return;
+    }
     const dateStr =
 date ||
 new Date().toLocaleDateString("en-IN", {
@@ -326,7 +361,7 @@ ${sections}
             <select value={template}onChange={e=>{const selected =savedTemplates.find(t=>String(t.id)===String(e.target.value));setTemplate(e.target.value);setSelectedTemplate(selected);}}
             className="w-full px-3 py-2.5 rounded-lg text-sm outline-none"
             style={{background:"#141B30",border:"1px solid #1E2D4A",color:"#E2E8F0"}}>
-            <option value="" disabled>Upload and select a previous-year paper</option>
+            <option value="" disabled>Select Default Template or an uploaded paper</option>
 
 
         {
@@ -384,7 +419,8 @@ ${sections}
             {subject
               ? `${subjectQs.length} bank questions and ${matchedSyllabus ? "a saved syllabus" : "no matching saved syllabus"} found`
               : "Enter a subject name to check backend readiness"}
-            {!template && " Select an uploaded previous-year paper to use as the exact blueprint."}
+            {!template && " Select the Default Template or an uploaded previous-year paper to use as the exact blueprint."}
+            {usingDefaultTemplate && " Using the built-in fixed 100-mark examination format."}
           </span>
         </div>
 

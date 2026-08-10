@@ -35,7 +35,8 @@ def blueprint_from_template(template, fallback=None):
             if not isinstance(item, dict):
                 continue
             # A repeated question number/subpart is normally an OR option.
-            slot_key = (str(item.get("section") or "General"), str(item.get("question_no") or ""), str(item.get("sub_question") or ""))
+            slot_key = (str(item.get("section") or "General"), str(item.get("question_no") or ""),
+                        str(item.get("sub_question") or ""), str(item.get("alternative") or ""))
             if slot_key in seen:
                 continue
             seen.add(slot_key)
@@ -45,6 +46,10 @@ def blueprint_from_template(template, fallback=None):
                 "sub_question": str(item.get("sub_question") or ""),
                 "marks": int(item.get("marks") or 0),
                 "choice_group": item.get("choice_group"),
+                "selection_group": item.get("selection_group"),
+                "required_count": int(item.get("required_count") or 1),
+                "co": item.get("co"),
+                "bloom": item.get("bloom"),
             })
     slots = [slot for section in sections.values() for slot in section if slot["marks"] > 0]
     if not slots:
@@ -75,8 +80,16 @@ def _distribution(slots):
 
 def _required_slots(slots):
     """OR alternatives are displayed, but only one contributes to paper marks."""
-    required, seen_choices = [], set()
+    required, seen_choices, selected_counts = [], set(), {}
     for slot in slots:
+        selection_group = slot.get("selection_group")
+        if selection_group:
+            selected = selected_counts.get(selection_group, 0)
+            if selected >= slot.get("required_count", 1):
+                continue
+            selected_counts[selection_group] = selected + 1
+            required.append(slot)
+            continue
         group = slot.get("choice_group")
         if group and group in seen_choices:
             continue

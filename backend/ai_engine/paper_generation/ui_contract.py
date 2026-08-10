@@ -50,9 +50,14 @@ def build_sets(question_pool, syllabus=None, template=None):
                 question["question_no"] = slot["question_no"]
                 question["sub_question"] = slot["sub_question"]
                 question["choice_group"] = slot.get("choice_group")
+                question["selection_group"] = slot.get("selection_group")
+                question["required_count"] = slot.get("required_count", 1)
+                # The fixed university template owns the displayed CO and BT
+                # columns.  An uploaded-question value remains the fallback.
+                question["co"] = slot.get("co") or question.get("co")
+                question["bloom"] = slot.get("bloom") or question["bloom_level"]
                 question["or_before"] = bool(slot.get("choice_group") and values and
                                              values[-1].get("choice_group") == slot.get("choice_group"))
-                question["bloom"] = question["bloom_level"]
                 values.append(question)
                 used.append(question)
                 used_globally.append(question)
