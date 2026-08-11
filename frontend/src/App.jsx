@@ -18,6 +18,15 @@ import TeacherManagement from "./pages/TeacherManagement";
 import AccessDenied from "./components/AccessDenied";
 import UploadCenter from "./pages/UploadCenter";
 
+const dedupeByKey = (items, keyFn) => {
+  const seen = new Map();
+  items.forEach(item => {
+    const key = keyFn(item);
+    if (key && !seen.has(key)) seen.set(key, item);
+  });
+  return [...seen.values()];
+};
+
 export default function App() {
   // ── Auth ──────────────────────────────────────────────────────────────────
   const [user,      setUser]      = useState(null);
@@ -30,22 +39,42 @@ export default function App() {
   const [papers,     setPapers]     = useState(SEED_PAPERS);
   const [syllabi,    setSyllabi]    = useState([]);  // parsed syllabi from upload
 
-  // ── Load papers from localStorage on mount ────────────────────────────────
+  // ── Load persisted app data on mount ─────────────────────────────────────
   useEffect(() => {
-    const storedPapers = localStorage.getItem("securexam_papers");
-    if (storedPapers) {
-      try {
-        setPapers(JSON.parse(storedPapers));
-      } catch (e) {
-        console.error("Failed to load papers from localStorage", e);
+    try {
+      const storedPapers = localStorage.getItem("securexam_papers");
+      const storedSyllabi = localStorage.getItem("securexam_syllabi");
+      const storedLogs = localStorage.getItem("securexam_logs");
+
+      if (storedPapers) {
+        const parsed = JSON.parse(storedPapers);
+        if (Array.isArray(parsed) && parsed.length) setPapers(parsed);
       }
+      if (storedSyllabi) {
+        const parsed = JSON.parse(storedSyllabi);
+        if (Array.isArray(parsed)) setSyllabi(dedupeByKey(parsed, s => `${s.subject_name || s.subject || ""}|${s.course_code || s.courseId || ""}|${s.filename || ""}`));
+      }
+      if (storedLogs) {
+        const parsed = JSON.parse(storedLogs);
+        if (Array.isArray(parsed)) setLogs(parsed);
+      }
+    } catch (e) {
+      console.error("Failed to load persisted app data from localStorage", e);
     }
   }, []);
 
-  // ── Save papers to localStorage whenever they change ─────────────────────
+  // ── Save app data to localStorage whenever they change ───────────────────
   useEffect(() => {
     localStorage.setItem("securexam_papers", JSON.stringify(papers));
   }, [papers]);
+
+  useEffect(() => {
+    localStorage.setItem("securexam_syllabi", JSON.stringify(syllabi));
+  }, [syllabi]);
+
+  useEffect(() => {
+    localStorage.setItem("securexam_logs", JSON.stringify(logs));
+  }, [logs]);
 
   // ── Logging helper ────────────────────────────────────────────────────────
   const addLog = (action, details) => {
@@ -61,6 +90,17 @@ export default function App() {
 
   // ── Auth handlers ─────────────────────────────────────────────────────────
   const handleLogin = (u) => {
+    try {
+      const storedPapers = JSON.parse(localStorage.getItem("securexam_papers") || "[]");
+      const storedSyllabi = JSON.parse(localStorage.getItem("securexam_syllabi") || "[]");
+      const storedLogs = JSON.parse(localStorage.getItem("securexam_logs") || "[]");
+      if (Array.isArray(storedPapers) && storedPapers.length) setPapers(storedPapers);
+      if (Array.isArray(storedSyllabi) && storedSyllabi.length) setSyllabi(dedupeByKey(storedSyllabi, s => `${s.subject_name || s.subject || ""}|${s.course_code || s.courseId || ""}|${s.filename || ""}`));
+      if (Array.isArray(storedLogs) && storedLogs.length) setLogs(storedLogs);
+    } catch (e) {
+      console.error("Failed to rehydrate app data on login", e);
+    }
+
     setUser(u);
     setActiveTab("dashboard");
     setLogs(prev => [{
@@ -77,7 +117,7 @@ export default function App() {
   // Called when teacher confirms a parsed syllabus
   const handleSyllabusUploaded = ({ file, subject, courseId, level, units }) => {
     const syl = { id: Date.now(), subject, courseId, level, units, filename: file.name, uploadedBy: user.username, uploadedAt: new Date().toISOString() };
-    setSyllabi(prev => [...prev, syl]);
+    setSyllabi(prev => dedupeByKey([...prev, syl], item => `${item.subject || item.subject_name || ""}|${item.courseId || item.course_code || ""}|${item.filename || ""}`));
     addLog("SYLLABUS_UPLOADED", `${file.name} — ${subject} ${courseId} — ${units.length} units extracted`);
   };
 

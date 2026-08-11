@@ -4,6 +4,13 @@
   "builtin": true,
   "template_json": {
     "template_type": "dkte_end_semester",
+    "college": {
+      "name": "D.K.T.E. Society's Textile & Engineering Institute",
+      "department": "Department of Engineering"
+    },
+    "header": {
+      "exam_title": "End Semester Examination"
+    },
     "learned_template": {
       "pattern": {
         "Q.1": [],

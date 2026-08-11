@@ -52,9 +52,6 @@ export default function QuestionBank({ user, questions, onGenerateQBank }) {
 
     const token = storedUser?.token;
 
-    console.log("TOKEN:", token);
-
-
     fetch("http://localhost:8000/upload/syllabi",{
 
         headers:{
@@ -69,16 +66,12 @@ JSON.parse(localStorage.getItem("user"))?.token
     .then(res=>res.json())
 
     .then(data=>{
-
-        console.log("Syllabi API:",data);
-
-
-        setSyllabi(
-            Array.isArray(data)
-            ? data
-            : []
-        );
-
+        const normalized = Array.isArray(data) ? data : [];
+        const unique = [...new Map(normalized.map(item => [
+          `${item.subject_name || item.subject || ""}|${item.course_code || item.courseId || ""}|${item.filename || ""}`,
+          item
+        ])).values()];
+        setSyllabi(unique);
     })
 
     .catch(err=>{

@@ -4,7 +4,7 @@ const STAGE_COLORS = {
   pending: "#334155"
 };
 
-export default function AiProcessGraph({ stages = [], active = 0, quality, model = "gpt-5" }) {
+export default function AiProcessGraph({ stages = [], active = 0, quality, model = "gemini-flash-lite-latest" }) {
   return (
     <div className="ai-arena rounded-2xl border p-4 mb-4" style={{ background: "#07111F", borderColor: "#1F2A44" }}>
       <div className="flex items-center justify-between mb-4 gap-3">
