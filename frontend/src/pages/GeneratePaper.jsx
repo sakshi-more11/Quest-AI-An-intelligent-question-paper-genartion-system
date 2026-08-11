@@ -153,9 +153,15 @@ export default function GeneratePaper({ user, questions, syllabi, templates, onG
     ...new Set([...questions.map(q => q.subject), ...syllabi.map(s => s.subject)])
   ], [questions, syllabi]);
 
-  const subjectQs = useMemo(() => questions.filter(q =>
-    q.subject.toLowerCase() === subject.toLowerCase() && q.level === level
-  ), [questions, subject, level]);
+  const subjectQs = useMemo(() => questions.filter(q => {
+    const questionSubject = String(q.subject || "").toLowerCase();
+    const questionLevel = String(q.level || "").trim();
+    const levelValue = String(level || "").trim().toLowerCase();
+    const isBloomTag = /^(BT|BL)\d+$/i.test(questionLevel);
+    const matchesSubject = questionSubject === String(subject || "").toLowerCase();
+    const matchesLevel = !levelValue || !questionLevel || isBloomTag || questionLevel.toLowerCase() === levelValue;
+    return matchesSubject && matchesLevel;
+  }), [questions, subject, level]);
 
   const matchedSyllabus = useMemo(() => {
     return syllabi.find(s =>
@@ -164,9 +170,11 @@ export default function GeneratePaper({ user, questions, syllabi, templates, onG
     );
   }, [syllabi, subject, courseId]);
 
-  // Either a faculty upload or the built-in university paper can be the
-  // source of truth for sections, question slots, and marks.
-  const canGenerate = subject.trim() && level.trim() && Boolean(template) && (matchedSyllabus || subjectQs.length >= 3);
+  // The paper can be generated as soon as the teacher has selected a subject,
+  // the class/year, and a template. A missing local question bank should not
+  // block the generation request; the backend can still build the paper from
+  // the saved syllabus/template and the bank data it has.
+  const canGenerate = Boolean(subject.trim()) && Boolean(level.trim()) && Boolean(template);
   const usingDefaultTemplate = isDefaultTemplate(selectedTemplate);
 
   const generate = async () => {
@@ -444,7 +452,7 @@ ${sections}
           <div className={`w-2.5 h-2.5 rounded-full shrink-0 ${canGenerate ? "bg-emerald-500" : "bg-amber-500"}`} />
           <span className="text-xs" style={{ color: canGenerate ? "#10B981" : "#F59E0B" }}>
             {subject
-              ? `${subjectQs.length} bank questions and ${matchedSyllabus ? "a saved syllabus" : "no matching saved syllabus"} found`
+              ? `${subjectQs.length} bank questions loaded for ${subject}${matchedSyllabus ? " and a matching syllabus was found" : " but no saved syllabus matched this subject"}`
               : "Enter a subject name to check backend readiness"}
             {!level && " Enter the year (T.Y / S.Y / F.Y) to continue."}
             {!template && " Select the Default Template or an uploaded previous-year paper to use as the exact blueprint."}

@@ -14,6 +14,27 @@ const GEN_STAGES = [
   { title: "Accuracy", detail: "Backend returns quality scores and clean questions." },
 ];
 
+function normalizeBloomLevel(value) {
+  const raw = String(value ?? "").trim();
+  if (!raw) return "BT2";
+
+  const compact = raw.replace(/[^A-Za-z0-9]/g, "").toUpperCase();
+  const mapped = compact.replace(/^BTE/i, "BT");
+
+  if (/^BT[1-6]$/.test(mapped)) return mapped;
+
+  const names = {
+    REMEMBER: "BT1",
+    UNDERSTAND: "BT2",
+    APPLY: "BT3",
+    ANALYZE: "BT4",
+    EVALUATE: "BT5",
+    CREATE: "BT6",
+  };
+
+  return names[compact] || "BT2";
+}
+
 export default function QuestionBank({ user, questions, onGenerateQBank }) {
   const isAdmin = user.role === "admin";
   const subjects = [...new Set(questions.map(q => q.subject))];
@@ -163,13 +184,13 @@ JSON.parse(localStorage.getItem("user"))?.token
 
 
                 bloom:
-                q.blooms_level
-                || "BT4",
+                normalizeBloomLevel(
+                    q.blooms_level || q.bloom_level || q.bloom || "BT2"
+                ),
 
 
                 level:
-                q.blooms_level
-                || "BT4",
+                q.level || "College",
 
 
                 createdBy:
