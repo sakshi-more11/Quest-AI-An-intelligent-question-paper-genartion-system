@@ -95,5 +95,10 @@ class PaperValidator:
 
             )
 
+        bt1_count = sum(q.get("bloom_level", q.get("bloom")) == "BT1" for q in questions)
+        if bt1_count > 1:
+            report["valid"] = False
+            report["errors"].append("A complete paper may contain at most one BT1 question")
+
 
         return report

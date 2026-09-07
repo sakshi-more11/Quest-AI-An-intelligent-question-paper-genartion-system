@@ -31,6 +31,14 @@ export default function App() {
   // ── Auth ──────────────────────────────────────────────────────────────────
   const [user,      setUser]      = useState(null);
   const [activeTab, setActiveTab] = useState("dashboard");
+  // Every new application session opens in the professional dark theme.
+  const [theme, setTheme] = useState("dark");
+
+  useEffect(() => {
+    document.documentElement.classList.toggle("theme-light", theme === "light");
+    document.documentElement.style.colorScheme = theme;
+    localStorage.setItem("questai_theme", theme);
+  }, [theme]);
 
   // ── Global state ──────────────────────────────────────────────────────────
   const [questions,  setQuestions]  = useState(SEED_QUESTIONS);
@@ -239,13 +247,20 @@ export default function App() {
   };
 
   // ── Not logged in ─────────────────────────────────────────────────────────
-  if (!user) return <LoginPage onLogin={handleLogin} />;
+  if (!user) return <LoginPage onLogin={handleLogin} theme={theme} onToggleTheme={() => setTheme(current => current === "dark" ? "light" : "dark")} />;
 
   // ── Main layout ───────────────────────────────────────────────────────────
   return (
-    <div className="flex h-screen overflow-hidden" style={{ background: "#080F1A" }}>
+    <div className="flex h-screen overflow-hidden app-shell" style={{ background: "var(--app-background)" }}>
       <Sidebar user={user} activeTab={activeTab} setActiveTab={setActiveTab} onLogout={handleLogout} />
-      <main className="flex-1 overflow-y-auto p-6" style={{ background: "#0B1320" }}>
+      <button type="button" onClick={() => setTheme(current => current === "dark" ? "light" : "dark")} aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} theme`} title={`Switch to ${theme === "dark" ? "light" : "dark"} theme`} className="theme-icon-toggle">
+        {theme === "dark" ? (
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        ) : (
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"/></svg>
+        )}
+      </button>
+      <main className="flex-1 overflow-y-auto p-6" style={{ background: "var(--app-surface)" }}>
         <div className="max-w-6xl mx-auto px-2 sm:px-4 pb-6">
           {renderPage()}
         </div>

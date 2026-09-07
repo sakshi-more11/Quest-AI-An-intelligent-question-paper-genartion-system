@@ -4,13 +4,14 @@ Question drafting is the only OpenRouter task.  Classification intentionally
 uses the project's existing fine-tuned BERT artefacts and never calls an LLM.
 """
 
-import re
+from backend.ai_engine.quality.bloom_mapper import BloomMapper
 
 
 class BloomClassifier:
     def __init__(self):
         self._bloom = None
         self._difficulty = None
+        self._mapper = BloomMapper()
 
     def classify(self, question):
         text = str(question or "").strip()
@@ -23,9 +24,10 @@ class BloomClassifier:
                 self._bloom, self._difficulty = predict_bloom, predict_difficulty
             bloom = self._bloom(text)
             difficulty = self._difficulty(text)
+            bloom_level = self._mapper.classify(text)
             return {
-                "bloom_level": re.match(r"BT[1-6]", bloom["bloom_level"]).group(0),
-                "difficulty": difficulty["difficulty"],
+                "bloom_level": bloom_level,
+                "difficulty": "Easy" if bloom_level == "BT1" else difficulty["difficulty"],
                 "bloom_confidence": bloom.get("confidence"),
                 "difficulty_confidence": difficulty.get("confidence"),
                 "co_mapping": "",
@@ -33,7 +35,7 @@ class BloomClassifier:
         except Exception:
             # The existing project has a lightweight deterministic classifier
             # for deployments where the BERT artefact cannot be loaded.
-            from backend.ai_engine.classifier.bloom_bert_classifier import BloomBERTClassifier
             from backend.ai_engine.classifier.difficulty_classifier import DifficultyClassifier
-            return {"bloom_level": BloomBERTClassifier().predict(text).replace("BL", "BT"),
-                    "difficulty": DifficultyClassifier().predict(text, 7), "co_mapping": ""}
+            bloom_level = self._mapper.classify(text)
+            return {"bloom_level": bloom_level,
+                    "difficulty": "Easy" if bloom_level == "BT1" else DifficultyClassifier().predict(text, 7), "co_mapping": ""}

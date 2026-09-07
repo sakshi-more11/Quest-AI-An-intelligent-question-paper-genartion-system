@@ -145,10 +145,7 @@ class QuestionBankService:
 
                 marks=int(q.get("marks", 5)),
 
-                blooms_level=q.get(
-                    "bloom_level",
-                    "BT2"
-                ),
+                blooms_level=q.get("blooms_level", q.get("bloom_level", "BT2")),
 
                 difficulty=q.get(
                     "difficulty",

@@ -101,11 +101,33 @@ Rules:
   analysis, and comparison under stated constraints.
 - Anchor every question to a named concept, method, component, or measurable
   condition found in the material. State assumptions or inputs when needed.
-- Include numerical/design-oriented questions wherever the material permits;
-  do not manufacture numbers or facts absent from it.
+- Include numerical/design-oriented questions wherever the material permits.
+  Never copy worked-example operands or answers from the material (for example,
+  do not repeat "2 + 3"). Create an equivalent assessment with different,
+  sensible values (for example, "4 + 5") while preserving the same concept.
 - Vary opening verbs and sentence patterns. "Explain", "Describe", and
   "Discuss" together may start no more than 8 questions.
 - Marks should be from 5 to 10.Not all questions should have same marks.
+- Use only these approved Bloom verbs and label the question from its first
+  cognitive task: BT1 Define/List/Identify/Recall/Name/State/Label/Match/
+  Recognize/Select/Reproduce/Quote/Memorize/Duplicate/Repeat/Record/Locate/
+  Cite/Outline/Enumerate; BT2 Explain/Paraphrase/Report/Describe/Summarize/
+  Interpret/Classify/Discuss/Restate/Translate/Compare/Illustrate/Infer/
+  Predict/Estimate/Give examples/Rephrase/Review/Express/Clarify; BT3
+  Practice/Calculate/Implement/Operate/Use/Illustrate/Solve/Demonstrate/
+  Employ/Execute/Apply/Sketch/Interpret/Modify/Relate/Show/Utilize/Compute/
+  Perform/Change; BT4 Compare/Contrast/Categorize/Organize/Distinguish/
+  Differentiate/Examine/Investigate/Deconstruct/Correlate/Break down/Test/
+  Question/Diagram/Inspect/Attribute/Discriminate/Outline/Subdivide/Detect;
+  BT5 Assess/Judge/Defend/Prioritize/Critique/Recommend/Justify/Appraise/
+  Argue/Validate/Conclude/Rate/Support/Interpret/Score/Evaluate/Decide/
+  Debate/Rank/Verify; BT6 Invent/Develop/Design/Compose/Generate/Construct/
+  Formulate/Devise/Plan/Produce/Synthesize/Assemble/Propose/Author/Build/
+  Combine/Originate/Draft/Innovate/Compile. Shared verbs must use their task
+  context: scenarios/data use BT3; comparing relationships uses BT4.
+- Include at least 12 scenario-based questions across BT3--BT6. Each must
+  state a realistic engineering case, condition, input, fault, or constraint
+  and ask the student to act on it; do not use scenario wording for BT1.
 - CO i.e Course Outcomes re present in the syllabus file take CO from there.
 Example-CO1: Fundamentals
 CO2: Algorithms/Techniques
@@ -122,11 +144,11 @@ BLOOM DISTRIBUTION
 
 
 BT1 Remember:
-4 questions
+1 question maximum (zero or one is acceptable)
 
 
 BT2 Understand:
-10 questions
+11 questions
 
 
 BT3 Apply:
@@ -142,7 +164,7 @@ BT5 Evaluate:
 
 
 BT6 Create:
-3 questions
+5 questions
 
 
 
@@ -158,15 +180,15 @@ DIFFICULTY DISTRIBUTION
 
 
 Easy:
-10
+12
 
 
 Medium:
-20
+16
 
 
 Hard:
-10
+12
 
 
 

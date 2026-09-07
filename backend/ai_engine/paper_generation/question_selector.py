@@ -1,22 +1,28 @@
 """Constraint-aware, deterministic selection from the verified question bank."""
 
 from difflib import SequenceMatcher
+from backend.ai_engine.quality.bloom_mapper import BloomMapper
 
 
 class QuestionSelector:
     def __init__(self, duplicate_threshold=0.88):
         self.duplicate_threshold = duplicate_threshold
+        self.bloom_mapper = BloomMapper()
 
     def select(self, question_pool, marks_distribution, syllabus_topics=None):
         required = self._requirements(marks_distribution)
         candidates = self._deduplicate(question_pool)
+        for candidate in candidates:
+            candidate["bloom_level"] = self.bloom_mapper.classify(candidate.get("question", ""))
         selected, used_topics = [], set()
         for marks in sorted(required, reverse=True):
             for _ in range(required[marks]):
                 # Template marks describe the slot, not a prerequisite on
                 # the stored question.  The selected question is assigned
                 # the slot mark later by TemplateApplier.
-                choices = [question for question in candidates if question not in selected]
+                choices = [question for question in candidates if question not in selected and (
+                    question.get("bloom_level") != "BT1" or not any(existing.get("bloom_level") == "BT1" for existing in selected)
+                )]
                 if not choices:
                     continue
                 # Coverage first, then preserve a varied Bloom/difficulty mix, then stable text order.

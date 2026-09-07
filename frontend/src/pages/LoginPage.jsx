@@ -10,7 +10,9 @@ import {
 
 
 export default function LoginPage({
-  onLogin
+  onLogin,
+  theme,
+  onToggleTheme,
 }){
 
 
@@ -124,11 +126,15 @@ export default function LoginPage({
 return (
 
 <div
-className="min-h-screen flex items-center justify-center px-4"
+className="min-h-screen flex items-center justify-center px-4 login-screen"
 style={{
 background:"#08121F"
 }}
 >
+
+<button type="button" onClick={onToggleTheme} aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} theme`} title={`Switch to ${theme === "dark" ? "light" : "dark"} theme`} className="theme-icon-toggle">
+{theme === "dark" ? <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg> : <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"/></svg>}
+</button>
 
 
 <div
@@ -139,6 +145,7 @@ rounded-[32px]
 border border-slate-800
 bg-slate-950/90
 shadow-[0_32px_70px_rgba(15,23,42,0.35)]
+login-card
 "
 >
 
@@ -165,24 +172,7 @@ background:
 <div className="mb-8">
 
 
-<div
-className="
-inline-flex
-items-center
-justify-center
-w-12 h-12
-rounded-3xl
-bg-slate-800
-text-white
-text-lg
-font-semibold
-mb-4
-"
->
-
-SecureExam
-
-</div>
+<div className="login-logo mb-5" aria-label="QuestAI logo"><span>Q</span><div><strong>QuestAI</strong><small>QUESTION PAPER SYSTEM</small></div></div>
 
 
 

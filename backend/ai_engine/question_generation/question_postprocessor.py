@@ -6,8 +6,12 @@ Cleans generated questions.
 
 import re
 
+from backend.ai_engine.quality.bloom_mapper import BloomMapper
+
 
 class QuestionPostProcessor:
+
+    _BLOOM_MAPPER = BloomMapper()
 
     # Raw source material, instructions, and generic lead-ins must never be
     # allowed into the question bank.  They are a common symptom of an LLM
@@ -63,8 +67,9 @@ class QuestionPostProcessor:
             return True
         # A question needs an interrogative/task verb and should not be a
         # pasted paragraph from a PDF/PPT.
-        verbs = ("describe", "discuss", "compare", "analyse", "analyze", "design",
-                 "derive", "evaluate", "formulate", "implement", "calculate",
-                 "illustrate", "justify", "differentiate", "develop", "write")
+        verbs = tuple(
+            verb for level_verbs in cls._BLOOM_MAPPER.VERBS.values()
+            for verb in level_verbs
+        ) + ("analyse", "derive", "write")
         words = question.split()
         return len(words) < 6 or len(words) > 55 or not any(word in lowered for word in verbs)

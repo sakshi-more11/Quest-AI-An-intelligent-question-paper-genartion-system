@@ -27,11 +27,11 @@ export default function Sidebar({ user, activeTab, setActiveTab, onLogout }) {
     <aside className="flex flex-col h-full shrink-0" style={{ width: 240, background: "#0D1726", borderRight: "1px solid rgba(148,163,184,0.12)" }}>
       <div className="px-5 py-6 border-b" style={{ borderColor: "rgba(148,163,184,0.1)" }}>
         <div className="inline-flex items-center gap-3 rounded-3xl px-4 py-3 bg-slate-950/80 border border-slate-800">
-          <div className="w-11 h-11 rounded-3xl flex items-center justify-center text-lg font-bold text-white" style={{ background: "#2563EB" }}>
-            SE
+          <div className="w-11 h-11 rounded-3xl flex items-center justify-center text-lg font-bold text-white" style={{ background: "#2563EB" }} aria-label="QuestAI logo">
+            Q
           </div>
           <div>
-            <div className="text-sm font-semibold" style={{ color: "#F8FAFC" }}>SecureExam</div>
+            <div className="text-sm font-semibold" style={{ color: "#F8FAFC" }}>QuestAI</div>
             <div className="text-[11px] uppercase tracking-[0.18em]" style={{ color: "#94A3B8" }}>Question Paper System</div>
           </div>
         </div>
